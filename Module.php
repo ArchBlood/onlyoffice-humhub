@@ -85,6 +85,19 @@ class Module extends \humhub\components\Module
         return $this->settings->get('serverUrl');
     }
 
+    public function getStorageUrl($params)
+    {
+        $internalStorageUrl = $this->settings->get('storageUrl');
+
+        if (empty($internalStorageUrl)) {
+            $url = Url::to($params, true);
+        } else {
+            $url =  preg_replace("/{\/\z}/", "", $internalStorageUrl) . Url::to($params, false);
+        }
+
+        return $url;
+    }
+
     /**
      * 
      * @return type

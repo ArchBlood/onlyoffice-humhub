@@ -113,7 +113,7 @@ class EditorWidget extends JsWidget
             'documentType' => $this->documentType,
             'document' => [
                 'title' => Html::encode($this->file->fileName),
-                'url' => Url::to(['/onlyoffice/backend/download', 'key' => $key], true),
+                'url' => $module->getStorageUrl(['/onlyoffice/backend/download', 'key' => $key]),
                 'fileType' => Html::encode(strtolower(FileHelper::getExtension($this->file))),
                 'key' => $key,
                 'info' => [
@@ -127,7 +127,7 @@ class EditorWidget extends JsWidget
             'editorConfig' => [
                 'mode' => $this->mode,
                 'lang' => ($user) && !empty($user->language) ? $user->language : Yii::$app->language,
-                'callbackUrl' => Url::to(['/onlyoffice/backend/track', 'key' => $key], true),
+                'callbackUrl' => $module->getStorageUrl(['/onlyoffice/backend/track', 'key' => $key]),
                 'user' => [
                     'id' => ($user) ? Html::encode($user->guid) : '',
                     'name' => ($user) ? Html::encode($user->displayname) : 'Anonymous User',
